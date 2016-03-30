@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bitcamp 2016</title>
+    <meta name="description" content="bitcamp">
+    <meta property="og:title" content="Bitcamp 2016">
+    <meta property="og:site_name" content="Bitcamp">
+    <meta property="og:url" content="http://bitca.mp/">
+    <meta property="og:description" content="Bitcamp is a place for exploration. You will have 36 hours to delve into your curiosities, learn something new, and make something awesome. With world-class mentors and hundreds of fellow campers, you’re in for an amazing time. If you’re ready for an adventure, see you by the fire!">
+    <meta property="og:image" content="http://bitca.mp/img/facebook-share-link.png" />
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="http://bitca.mp/">
+    <meta name="twitter:title" content="Bitcamp 2016">
+    <meta name="twitter:description" content="Bitcamp is a place for exploration. You will have 36 hours to delve into your curiosities, learn something new, and make something awesome. With world-class mentors and hundreds of fellow campers, you’re in for an amazing time. If you’re ready for an adventure, see you by the fire!">
+    <meta name="twitter:image" content="http://bitca.mp/img/twitter-share-link.png">
+    <link rel="stylesheet" href="https://bitca.mp/css/main.css">
+    <link rel="stylesheet" href="https://bitca.mp/css/bootstrap.min.css">
+    <script src="https://bitca.mp/js/jquery-1.12.0.min.js"></script>
+    <link rel="icon" type="image/png" href="https://bitca.mp/favicon.ico">
+    <script>
+      $(document).ready(function(){
+        $('#id_image').on('change',function(){
+          $('#filename_display').html($(this).val().split("\\").pop()); 
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <style>
+      html,body {
+        background-color: #CBF2FF;
+      }
+
+      #pixelFormContainer {
+        position: relative;
+      }
+
+      #pixelForm {
+        position: absolute;
+        top: 300px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        height: 88px;
+      }
+
+      #id_image_container {
+        border: 5px dashed #FF6F3F;
+        border-radius: 5px;
+        background: none;
+        height: 150px;
+        width: 300px;
+        margin: auto;
+        margin-top: 20px;
+        font-size: 200%;
+        color: #FF6F3F;
+      }
+      
+      #id_image_container:hover {
+        color: #FF3F46;
+        border-color: #FF3F46;
+      }
+
+      #id_image {
+        height: 100%;
+        width: 100%;
+        opacity: 0.0;
+      }
+
+      #form-glyph {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 91px;
+      }
+
+      #filename_display {
+        margin-top: 10px;
+        font-size: 90%;
+      }
+ 
+      .info-text {
+        color: #1A2E33;
+      }
+    </style>
+    <div class="sky" id="sky">
+      <img src="https://bitca.mp/assets/img/bitcamp-logo-text-orange.svg" id="logo-text">
+    </div>
+    <div>
+      <form action="{% url 'pixelate' %}" method="post" enctype="multipart/form-data" id="pixelForm">
+    	  {% csrf_token %}
+    	  <p class="info-text">
+            <div>Upload a picture to Bitcampify it</div>
+          </p>
+          <p>
+    	    <div id="id_image_container">
+              <i class="glyphicon glyphicon-cloud-upload" id="form-glyph"></i>
+              {{ form.image }}
+            </div>
+    	  </p>
+          <div id="filename_display"></div>
+      	  <p><input type="submit" value="Bitcampify" class="orange-button" /></p>
+      </form>
+    </div>
+  </body>
+</html>
